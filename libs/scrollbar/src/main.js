@@ -25,8 +25,8 @@ export default {
     lastingShowBar: Boolean, // 是否持续显示滚动条
     transition: Boolean, // 滚动是否添加过渡效果
     noresize: Boolean, // 如果 container 尺寸不会发生变化，最好设置它可以优化性能
-    width: String,
-    height: String,
+    width: String, 
+    height: String, 
     maxHeight: String,
     maxWidth: String,
     tag: {

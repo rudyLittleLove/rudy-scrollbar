@@ -1,0 +1,59 @@
+@import 'variable.styl'
+html,body,textarea
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size 14px
+  height 100%
+  margin 0
+  color #666666
+ul
+  list-style none
+img
+  border-width 0
+h1, h2, h3, h4, h5, h6, p, form
+  margin 0
+dl, ol, ul, li, dd, dt
+  margin 0
+  padding 0
+  list-style none
+button
+  padding 0
+button:focus
+  outline 0
+.div-content
+  width $contentWidth
+  margin-left auto
+  margin-right auto
+
+.shmic-alert
+  .el-message-box__header
+    padding-top 10px
+    background-color rgb(254, 231, 233)
+    .el-message-box__title
+      color rgb(241, 71, 71)
+      font-size 16px
+    .el-message-box__headerbtn
+      top 11px
+  .el-message-box__content
+    padding-top 40px
+    padding-bottom 40px
+    text-align center
+    .el-message-box__message
+      font-size 14px
+      .icon-cuowu
+        color rgb(241, 71, 71)
+        font-size 18px
+        padding 5px
+  &.success
+    .el-message-box__header
+      background-color rgb(237, 253, 245)
+      .el-message-box__title
+        color rgb(52, 198, 134)
+    .icon-zhengque-copy
+      color rgb(52, 198, 134)
+      font-size 18px
+      padding 5px
+.mFs:before
+  content "*"
+  font-size 16px
+  color #d92711;
+  font-style normal
