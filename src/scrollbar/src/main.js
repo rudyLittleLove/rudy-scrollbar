@@ -1,0 +1,197 @@
+// reference https://github.com/noeldelgado/gemini-scrollbar/blob/master/index.js
+
+import "../css/scroll-bar.styl";
+
+import { addResizeListener, removeResizeListener } from "../utils/resize-event";
+import scrollbarWidth from "../utils/scrollbar-width";
+import { toObject } from "../utils/util";
+import { scrollTo } from "./util";
+import Bar from "./bar";
+
+/* istanbul ignore next */
+export default {
+  name: "RudyScrollbar",
+
+  components: { Bar },
+
+  props: {
+    native: Boolean,
+    wrapStyle: {}, // 滚动条外框样式
+    wrapClass: {}, // 滚动条外框class
+    viewClass: {}, // 内容区域class
+    viewStyle: {}, // 内容区域样式
+    barClass: {}, // 滚动条class
+    thumbClass: {}, // 滚动条拖动按钮class
+    lastingShowBar: Boolean, // 是否持续显示滚动条
+    transition: Boolean, // 滚动是否添加过渡效果
+    noresize: Boolean, // 如果 container 尺寸不会发生变化，最好设置它可以优化性能
+    tag: {
+      type: String,
+      default: "div"
+    }
+  },
+
+  data() {
+    return {
+      sizeWidth: "0",
+      sizeHeight: "0",
+      moveX: 0,
+      moveY: 0
+    };
+  },
+
+  computed: {
+    wrap() {
+      return this.$refs.wrap;
+    }
+  },
+
+  render(h) {
+    let gutter = scrollbarWidth();
+    let style = this.wrapStyle;
+
+    if (gutter) {
+      const gutterWith = `-${gutter}px`;
+      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
+
+      if (Array.isArray(this.wrapStyle)) {
+        style = toObject(this.wrapStyle);
+        style.marginRight = style.marginBottom = gutterWith;
+      } else if (typeof this.wrapStyle === "string") {
+        style += gutterStyle;
+      } else {
+        style = gutterStyle;
+      }
+    }
+    const view = h(
+      this.tag,
+      {
+        class: ["el-scrollbar__view", this.viewClass],
+        style: this.viewStyle,
+        ref: "resize"
+      },
+      this.$slots.default
+    );
+    const wrap = (
+      <div
+        ref="wrap"
+        style={style}
+        onScroll={this.handleScroll}
+        class={[
+          this.wrapClass,
+          "el-scrollbar__wrap",
+          gutter ? "" : "el-scrollbar__wrap--hidden-default"
+        ]}
+      >
+        {[view]}
+      </div>
+    );
+    let nodes;
+
+    if (!this.native) {
+      nodes = [
+        wrap,
+        <Bar
+          move={this.moveX}
+          size={this.sizeWidth}
+          barData={{
+            barClass: this.barClass,
+            thumbClass: this.thumbClass,
+            lastingShowBar: this.lastingShowBar,
+            transition: this.transition
+          }}
+        />,
+        <Bar
+          vertical
+          move={this.moveY}
+          size={this.sizeHeight}
+          barData={{
+            barClass: this.barClass,
+            thumbClass: this.thumbClass,
+            lastingShowBar: this.lastingShowBar,
+            transition: this.transition
+          }}
+        />
+      ];
+    } else {
+      nodes = [
+        <div
+          ref="wrap"
+          class={[this.wrapClass, "el-scrollbar__wrap"]}
+          style={style}
+        >
+          {[view]}
+        </div>
+      ];
+    }
+    return h("div", { class: "el-scrollbar" }, nodes);
+  },
+
+  methods: {
+    handleScroll(e) {
+      const wrap = this.wrap;
+
+      this.moveY = (wrap.scrollTop * 100) / wrap.clientHeight;
+      this.moveX = (wrap.scrollLeft * 100) / wrap.clientWidth;
+
+      this.$emit("scroll", e);
+    },
+
+    update() {
+      let heightPercentage, widthPercentage;
+      const wrap = this.wrap;
+      if (!wrap) return;
+
+      heightPercentage = (wrap.clientHeight * 100) / wrap.scrollHeight;
+      widthPercentage = (wrap.clientWidth * 100) / wrap.scrollWidth;
+
+      this.sizeHeight = heightPercentage < 100 ? heightPercentage + "%" : "";
+      this.sizeWidth = widthPercentage < 100 ? widthPercentage + "%" : "";
+    },
+    // scrollTop(m) {
+    //   this.transition ? scrollTo(m, "scrollTop", this.$refs.wrap):this.$refs.wrap.scrollTop = m;
+    // },
+    // scrollLeft(m) {
+    //   this.transition ? scrollTo(m, "scrollLeft", this.$refs.wrap):this.$refs.wrap.scrollLeft = m;
+    // },
+    scrollTo(x, y) {
+      this.scrollTop(y);
+      this.scrollLeft(x);
+      // if(this.transition){
+      //   scrollTo(y, "scrollTop", this.$refs.wrap);
+      //   scrollTo(x, "scrollLeft", this.$refs.wrap);
+      // } else {
+      //   this.$refs.wrap.scrollLeft = x
+      //   this.$refs.wrap.scrollTop = y
+      // }
+    }
+  },
+
+  mounted() {
+    // 优化处理判断是否添加过渡
+    if (this.transition) {
+      this.scrollTop = m => {
+        scrollTo(m, "scrollTop", this.$refs.wrap);
+      };
+      this.scrollLeft = m => {
+        scrollTo(m, "scrollLeft", this.$refs.wrap);
+      };
+    } else {
+      this.scrollTop = m => {
+        this.$refs.wrap.scrollTop = m;
+      };
+      this.scrollLeft = m => {
+        this.$refs.wrap.scrollLeft = m;
+      };
+    }
+
+    if (this.native) return;
+    this.$nextTick(this.update);
+    !this.noresize && addResizeListener(this.$refs.resize, this.update);
+  },
+
+  beforeDestroy() {
+    if (this.native) return;
+    !this.noresize && removeResizeListener(this.$refs.resize, this.update);
+  }
+};
