@@ -2,15 +2,13 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  // entry: './src/main.js',
-  entry: './src/scrollbar/index.js',
-  // entry: './src/components/scrollbar/index.js',
+  entry: './src/main.js',
+  // entry: './libs/scrollbar/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'rudy-scrollbar.js',
-    // filename: 'build.js'
-    // filename: 'test.js'
+    // filename: 'rudy-scrollbar.js',
+    filename: 'build.js',
     //增加以下库配置信息
     library: 'rudy-scrollbar',
     libraryTarget: 'umd',
