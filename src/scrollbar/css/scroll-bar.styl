@@ -2,47 +2,50 @@
   overflow hidden
   position relative
   &:hover
+  &:active
+  &:focus
     .el-scrollbar__bar
       opacity 1
-.el-scrollbar__wrap
-  overflow scroll
-  height 100%
-.el-scrollbar__view
-  min-width 100%
-  display inline-block
-.el-scrollbar__bar
-  position absolute
-  right 2px
-  bottom 2px
-  z-index 1
-  border-radius 4px
-  opacity 0
-  transition opacity .12s ease-out
-  &.opacity1
-    opacity 1
-  &.is-horizontal
-    height 5px
-    left 2px
-  &.is-vertical
-    width 6px
-    top 2px
-  &.is-vertical
-    .el-scrollbar__thumb
-      width 100%
-  &.is-horizontal
-    .el-scrollbar__thumb
-      height 100%
-.el-scrollbar__thumb
-  position relative
-  display block
-  width 0
-  height 0
-  cursor pointer
-  border-radius inherit
-  background-color hsla(220, 4%, 50%, .3)
-  transition background-color .3s
-.el-scrollbar__thumb:hover
-  background-color hsla(220,4%,58%,.5)
+      transition opacity .34s ease-out
+  .el-scrollbar__wrap
+    overflow scroll
+    height 100%
+  .el-scrollbar__view
+    min-width 100%
+    display inline-block
+  .el-scrollbar__bar
+    position absolute
+    right 2px
+    bottom 2px
+    z-index 1
+    border-radius 4px
+    opacity 0
+    transition opacity .12s ease-out
+    &.opacity1
+      opacity 1
+    &.is-horizontal
+      height 5px
+      left 2px
+    &.is-vertical
+      width 6px
+      top 2px
+    &.is-vertical
+      .el-scrollbar__thumb
+        width 100%
+    &.is-horizontal
+      .el-scrollbar__thumb
+        height 100%
+  .el-scrollbar__thumb
+    position relative
+    display block
+    width 0
+    height 0
+    cursor pointer
+    border-radius inherit
+    background-color hsla(220, 4%, 50%, .3)
+    transition background-color .3s
+  .el-scrollbar__thumb:hover
+    background-color hsla(220,4%,58%,.5)
 // .el-scrollbar__corner
 //   position absolute
 //   height 0

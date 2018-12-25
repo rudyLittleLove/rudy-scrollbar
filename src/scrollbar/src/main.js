@@ -25,6 +25,10 @@ export default {
     lastingShowBar: Boolean, // 是否持续显示滚动条
     transition: Boolean, // 滚动是否添加过渡效果
     noresize: Boolean, // 如果 container 尺寸不会发生变化，最好设置它可以优化性能
+    width: String,
+    height: String,
+    maxHeight: String,
+    maxWidth: String,
     tag: {
       type: String,
       default: "div"
@@ -61,6 +65,12 @@ export default {
         style += gutterStyle;
       } else {
         style = gutterStyle;
+      }
+      if(this.height){
+        style += " height:" + this.height + ";"
+      }
+      if(this.maxHeight){
+        style += " max-height:" + this.maxHeight + ";"
       }
     }
     const view = h(
@@ -124,7 +134,19 @@ export default {
         </div>
       ];
     }
-    return h("div", { class: "el-scrollbar" }, nodes);
+    
+    let scrollStyle = "";
+    this.width && (scrollStyle += " width:" + this.width + ";");
+    this.maxWidth && (scrollStyle += " max-width:" + this.maxWidth + ";");
+
+    return h(
+      "div",
+      {
+        class: "el-scrollbar",
+        style: scrollStyle
+      },
+      nodes
+    );
   },
 
   methods: {

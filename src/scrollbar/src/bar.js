@@ -27,7 +27,7 @@ export default {
     },
 
     barOpacity() {
-      return this.cursorDown || this.barData.lastingShowBar;
+      // return this.cursorDown || this.barData.lastingShowBar;
     }
   },
 
@@ -40,7 +40,7 @@ export default {
           "el-scrollbar__bar",
           "is-" + bar.key,
           this.barData.barClass,
-          { opacity1: this.barOpacity }
+          { opacity1: this.barData.lastingShowBar }
         ]}
         onMousedown={this.clickTrackHandler}
         // style={{
