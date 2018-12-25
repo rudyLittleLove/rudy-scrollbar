@@ -1,7 +1,7 @@
 {
   "name": "rudy-scrollbar",
   "description": "这是一个基于elementUI滚动条改造的插件",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "zhouyu <zhouyu@trendytech.com.cn>",
   "license": "MIT",
   "main": "dist/rudy-scrollbar.js",
