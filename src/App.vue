@@ -41,7 +41,7 @@
       <li>
         <h2>支持固定显示滚动条</h2>
         <rudy-scrollbar width="400px" height="300px" :lastingShowBar="true" :transition="true">
-          <h3>点击滚动条透明区域，查看效果</h3>
+          <h3>查看滚动条效果</h3>
           <ul class="description" style="height: 600px; width: 1000px">
             <li class="title">属性：</li>
             <li>lastingShowBar <em>是否持久显示滚动条</em> <span>Boolean 缺省：false</span></li>
@@ -73,9 +73,7 @@
           <span style="backround-color: #ffffff; position: absolute; right: 10px; top: 5px; color: red;">x:{{this.x}} y:{{this.y}}</span>
           <ul class="description" style="height: 600px; width: 1000px;">
             <li class="title">方法：</li>
-            <li>scrollTop <em>上下滚动</em> <span>Number 例:100</span></li>
-            <li>scrollLeft <em>垂直滚动</em> <span>Number 例:100</span></li>
-            <li>scrollTo <em>上下垂直滚动</em> <span>Number 例：x:100,y:100</span></li>
+            <li>scroll <em>滚动事件</em> <span>返回值 event 滚动事件对象</span></li>
           </ul>
         </rudy-scrollbar>
       </li>
