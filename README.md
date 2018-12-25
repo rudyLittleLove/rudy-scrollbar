@@ -1,4 +1,4 @@
-# r-test-scroll
+# rudy-scrollbar
 
 > A Vue.js project
 
