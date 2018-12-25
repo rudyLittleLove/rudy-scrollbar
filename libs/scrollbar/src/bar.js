@@ -4,17 +4,13 @@ import { renderThumbStyle, BAR_MAP, scrollTo } from "./util";
 /* istanbul ignore next */
 export default {
   name: "Bar",
-  data() {
-    return {
-      cursorDown: false
-    };
-  },
 
   props: {
     vertical: Boolean,
     size: String,
     move: Number,
-    barData: {}
+    barData: {},
+    showBar: Boolean
   },
 
   computed: {
@@ -27,7 +23,7 @@ export default {
     },
 
     barOpacity() {
-      // return this.cursorDown || this.barData.lastingShowBar;
+      return this.showBar || this.barData.lastingShowBar;
     }
   },
 
@@ -40,7 +36,7 @@ export default {
           "el-scrollbar__bar",
           "is-" + bar.key,
           this.barData.barClass,
-          { opacity1: this.barData.lastingShowBar }
+          { opacity1: this.barOpacity }
         ]}
         onMousedown={this.clickTrackHandler}
         // style={{

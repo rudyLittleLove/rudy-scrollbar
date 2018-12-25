@@ -40,7 +40,8 @@ export default {
       sizeWidth: "0",
       sizeHeight: "0",
       moveX: 0,
-      moveY: 0
+      moveY: 0,
+      showBar: false
     };
   },
 
@@ -110,6 +111,7 @@ export default {
             lastingShowBar: this.lastingShowBar,
             transition: this.transition
           }}
+          showBar={this.showBar}
         />,
         <Bar
           vertical
@@ -121,6 +123,7 @@ export default {
             lastingShowBar: this.lastingShowBar,
             transition: this.transition
           }}
+          showBar={this.showBar}
         />
       ];
     } else {
@@ -170,22 +173,9 @@ export default {
       this.sizeHeight = heightPercentage < 100 ? heightPercentage + "%" : "";
       this.sizeWidth = widthPercentage < 100 ? widthPercentage + "%" : "";
     },
-    // scrollTop(m) {
-    //   this.transition ? scrollTo(m, "scrollTop", this.$refs.wrap):this.$refs.wrap.scrollTop = m;
-    // },
-    // scrollLeft(m) {
-    //   this.transition ? scrollTo(m, "scrollLeft", this.$refs.wrap):this.$refs.wrap.scrollLeft = m;
-    // },
     scrollTo(x, y) {
       this.scrollTop(y);
       this.scrollLeft(x);
-      // if(this.transition){
-      //   scrollTo(y, "scrollTop", this.$refs.wrap);
-      //   scrollTo(x, "scrollLeft", this.$refs.wrap);
-      // } else {
-      //   this.$refs.wrap.scrollLeft = x
-      //   this.$refs.wrap.scrollTop = y
-      // }
     }
   },
 
@@ -193,17 +183,27 @@ export default {
     // 优化处理判断是否添加过渡
     if (this.transition) {
       this.scrollTop = m => {
-        scrollTo(m, "scrollTop", this.$refs.wrap);
+        this.showBar = true
+        scrollTo(m, "scrollTop", this.$refs.wrap, () => {
+          setTimeout(() => { this.showBar = false}, 500)
+        });
       };
       this.scrollLeft = m => {
-        scrollTo(m, "scrollLeft", this.$refs.wrap);
+        this.showBar = true
+        scrollTo(m, "scrollLeft", this.$refs.wrap, () => {
+          setTimeout(() => { this.showBar = false}, 500)
+        });
       };
     } else {
       this.scrollTop = m => {
+        this.showBar = true
         this.$refs.wrap.scrollTop = m;
+        setTimeout(() => { this.showBar = false}, 500)
       };
       this.scrollLeft = m => {
+        this.showBar = true
         this.$refs.wrap.scrollLeft = m;
+        setTimeout(() => { this.showBar = false}, 500)
       };
     }
 

@@ -34,7 +34,7 @@ export function renderThumbStyle({ move, size, bar }) {
   return style;
 }
 
-export function scrollTo(m, scroll, wrapDom) {
+export function scrollTo(m, scroll, wrapDom, callback) {
   var reg = /^-?(\d+(\.\d+)?)$/;
 
   let scrollSize =
@@ -53,10 +53,10 @@ export function scrollTo(m, scroll, wrapDom) {
   let ca = m - wrapDom[scroll];
   let mVar = ca > 0 ? 1 : -1;
 
-  scrollToSpeed(m, mVar, scroll, scrollSize, Math.abs(ca) / 50, wrapDom);
+  scrollToSpeed(m, mVar, scroll, scrollSize, Math.abs(ca) / 50, wrapDom, callback);
 }
 
-function scrollToSpeed(m, mVar, scroll, scrollSize, speed, wrapDom) {
+function scrollToSpeed(m, mVar, scroll, scrollSize, speed, wrapDom, callback) {
   let intM = wrapDom[scroll] + (speed += 1) * mVar;
 
   intM = mVar === -1 ? (intM < m ? m : intM) : intM > m ? m : intM;
@@ -68,8 +68,10 @@ function scrollToSpeed(m, mVar, scroll, scrollSize, speed, wrapDom) {
 
   if (intM !== m) {
     setTimeout(() => {
-      scrollToSpeed(m, mVar, scroll, scrollSize, speed, wrapDom);
+      scrollToSpeed(m, mVar, scroll, scrollSize, speed, wrapDom, callback);
     }, 10);
+  } else {
+    callback && callback()
   }
 }
 
