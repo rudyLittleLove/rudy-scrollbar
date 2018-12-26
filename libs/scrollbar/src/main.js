@@ -67,12 +67,9 @@ export default {
       } else {
         style = gutterStyle;
       }
-      if(this.height){
-        style += " height:" + this.height + ";"
-      }
-      if(this.maxHeight){
-        style += " max-height:" + this.maxHeight + ";"
-      }
+      
+      style = this.height ? `${style} height:${this.height};` : style;
+      style = this.maxHeight ? `${style} max-height:${this.maxHeight};`: style;
     }
     const view = h(
       this.tag,
@@ -139,8 +136,8 @@ export default {
     }
     
     let scrollStyle = "";
-    this.width && (scrollStyle += " width:" + this.width + ";");
-    this.maxWidth && (scrollStyle += " max-width:" + this.maxWidth + ";");
+    this.width && (scrollStyle += ` width: ${this.width};`);
+    this.maxWidth && (scrollStyle += ` max-width: ${this.maxWidth};`);
 
     return h(
       "div",
