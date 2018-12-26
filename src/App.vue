@@ -6,6 +6,7 @@
         <rudy-scrollbar width="400px" height="300px" :noresize="true">
           <h3>内容不会变化的 建议设置noresize提高效率</h3>
           <h4>因为自定义滚动条会监听内容区域大小，实时更新滚动条区域</h4>
+          <div style="color: red;">使用Vue.use() 的方式注册滚动条，就使用<br>&lt;rudy-scrollbar&gt; 内容区 &lt;rudy-scrollbar&gt; 标签 </div>
           <ul class="description" style="height: 600px">
             <li class="title">属性：</li>
             <li>width <em>滚动条容器宽度</em> <span>String 例:100px/100em/10%</span></li>
@@ -117,7 +118,7 @@
         <h2>修复目前elmentUI滚动条已存在的bug</h2>
         <div>
           <ul>
-            <li>1.阻止拖动滚动条时的拖动事件 ondragstart ，因为滚动条较小，时长发生拖动时没点击到中间滚动的thumb，从而选中了一些元素，此时点击鼠标拖动时会造成拖拽事件，放开鼠标不会触发mouseup事件，滚动条会一直跟随鼠标。</li>
+            <li>1.阻止拖动滚动条时的拖动事件 ondragstart ，因为滚动条较小，时常发生拖动时没点击到中间滚动的thumb，从而选中了一些元素，此时点击鼠标拖动时会造成拖拽事件，放开鼠标不会触发mouseup事件，滚动条会一直跟随鼠标。</li>
             <li>2.destroyed hook 时， 执行重置方法（内部重置），如果处于拖动中时，滚动条组件销毁，内部重置方法无法调用，会出现控制台报大量错误（鼠标移动控制滚动条需要处理的方法造成的），虽然页面中看不到，但影响性能与调试。</li>
             <br>
             <li style="font-weight: bold; color: red;">为什么没有滚动条样式？？？，小伙子，有了DOM，难道样式都不会加吗？想要什么样子的滚动条，自己找UI设计去。改炸了不负责啊！！</li>
