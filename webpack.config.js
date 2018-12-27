@@ -39,9 +39,11 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          name: '[name].[ext]?[hash]',
+          limit: 5000, // 吧小于5kb的文件打成Base64的格式，写入JS
+          outputPath: 'images/', // 打包后的图片文件放入到images文件夹下
         }
       }
     ]
