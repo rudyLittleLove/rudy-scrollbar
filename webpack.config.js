@@ -6,7 +6,7 @@ module.exports = {
   // entry: './libs/scrollbar/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: './dist/',
+    publicPath: './dist/images/',
     // filename: 'rudy-scrollbar.js',
     filename: 'build.js',
     //增加以下库配置信息
