@@ -67,10 +67,9 @@ export default {
       } else {
         style = gutterStyle;
       }
-      
-      style = this.height ? `${style} height:${this.height};` : style;
-      style = this.maxHeight ? `${style} max-height:${this.maxHeight};`: style;
     }
+    style = this.height ? `${style} height: calc(100% + ${gutter}px);` : style;
+    style = this.maxHeight ? `${style} max-height: calc(${this.maxHeight} + ${gutter}px);`: style;
     const view = h(
       this.tag,
       {
@@ -138,6 +137,7 @@ export default {
     let scrollStyle = "";
     this.width && (scrollStyle += ` width: ${this.width};`);
     this.maxWidth && (scrollStyle += ` max-width: ${this.maxWidth};`);
+    this.height && (scrollStyle += ` height: ${this.height};`);
 
     return h(
       "div",

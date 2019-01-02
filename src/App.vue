@@ -32,7 +32,7 @@
           <ul class="description" style="height: 600px;">
             <li class="title">属性：</li>
             <li>max-width <em>滚动条容器最大宽度</em> <span>String 例:100px/100em/10%</span></li>
-            <li>max-height <em>滚动条容器最大高度</em> <span>String 例:100px/100em/10%</span></li>
+            <li>max-height <em>滚动条容器最大高度</em> <span>String 例:100px/100em</span></li>
             <img src="./images/twotwo.jpg" alt="" style="width: 1000px;height:auto">
           </ul>
         </rudy-scrollbar>
@@ -61,9 +61,9 @@
       </li>
       <li>
         <h2>支持滚动条定位</h2>
-        <scrollbar ref="scrollbar" width="600px" height="300px" :transition="true">
+        <scrollbar ref="scrollbar" max-width="600px" max-height="200px" :transition="true">
           <h3>输入x与y轴坐标，跳转。非法字符忽略</h3>
-          <ul class="description" style="height: 600px; width: 1000px">
+          <ul class="description" style="height: 300px; width: 1500px; overflow: hidden">
             <li class="title">方法：</li>
             <li>scrollTop <em>上下滚动</em> <span>Number 例:100</span></li>
             <li>scrollLeft <em>垂直滚动</em> <span>Number 例:100</span></li>
@@ -84,7 +84,7 @@
         <rudy-scrollbar width="600px" height="300px" :transition="true" @scroll="scrollHandle">
           <h3>滚动查看位置（打开控制台查看返回事件对象，此事件对象为原生滚动事件对象）</h3>
           <span style="backround-color: #ffffff; position: absolute; right: 10px; top: 5px; color: red;">x:{{this.x}} y:{{this.y}}</span>
-          <ul class="description" style="height: 600px; width: 1000px;">
+          <ul class="description" style="height: 600px; width: 1500px;">
             <li class="title">事件：</li>
             <li>scroll <em>滚动事件</em> <span>返回值 event 滚动事件对象</span></li>
             <img src="./images/six1.jpg" alt="">
