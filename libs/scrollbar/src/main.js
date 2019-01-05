@@ -25,6 +25,7 @@ export default {
     lastingShowBar: Boolean, // 是否持续显示滚动条
     transition: Boolean, // 滚动是否添加过渡效果
     noresize: Boolean, // 如果 container 尺寸不会发生变化，最好设置它可以优化性能
+    wrapResize: Boolean,
     width: String, 
     height: String, 
     maxHeight: String,
@@ -207,10 +208,12 @@ export default {
     if (this.native) return;
     this.$nextTick(this.update);
     !this.noresize && addResizeListener(this.$refs.resize, this.update);
+    this.wrapResize && addResizeListener(this.$refs.wrap, this.update);
   },
 
   beforeDestroy() {
     if (this.native) return;
     !this.noresize && removeResizeListener(this.$refs.resize, this.update);
+    this.wrapResize && removeResizeListener(this.$refs.wrap, this.update);
   }
 };
