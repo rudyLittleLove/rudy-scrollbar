@@ -1,6 +1,6 @@
 {
   "name": "rudy-scrollbar",
-  "description": "这是一个基于elementUI滚动条改造的插件",
+  "description": "这是一个基于elementUI滚动条改造的插件,功能更加强大，支持适应宽，过渡移动，max值等等，更加接近于原生滚动条的用法，样式却支持更改。",
   "version": "1.0.9",
   "author": "rudy <rudy_zhou@sina.cn>",
   "license": "MIT",
