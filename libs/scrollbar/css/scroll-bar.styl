@@ -1,21 +1,15 @@
-.el-scrollbar
+.rudy-scrollbar
   overflow hidden
   position relative
   &:hover
   &:active
   &:focus
-    .el-scrollbar__bar
+    .rudy-scrollbar__bar
       opacity 1
       transition opacity .34s ease-out
-  .el-scrollbar__wrap
+  .rudy-scrollbar__wrap
     overflow scroll
-    height 100%
-    font-size 0
-  .el-scrollbar__view
-    min-width 100%
-    display inline-block
-    font-size 1rem
-  .el-scrollbar__bar
+  .rudy-scrollbar__bar
     position absolute
     right 2px
     bottom 2px
@@ -32,12 +26,12 @@
       width 6px
       top 2px
     &.is-vertical
-      .el-scrollbar__thumb
+      .rudy-scrollbar__thumb
         width 100%
     &.is-horizontal
-      .el-scrollbar__thumb
+      .rudy-scrollbar__thumb
         height 100%
-  .el-scrollbar__thumb
+  .rudy-scrollbar__thumb
     position relative
     display block
     width 0
@@ -46,9 +40,19 @@
     border-radius inherit
     background-color hsla(220, 4%, 50%, .3)
     transition background-color .3s
-  .el-scrollbar__thumb:hover
+  .rudy-scrollbar__thumb:hover
     background-color hsla(220,4%,58%,.5)
-// .el-scrollbar__corner
+.adapt-width
+  &.rudy-scrollbar__wrap
+    font-size 0
+  .rudy-scrollbar__view
+    font-size 1rem
+    display inline-block
+    min-width 100%
+.rudy-scrollbar__wrap--hidden-default::-webkit-scrollbar
+  width 0
+  height 0
+// .rudy-scrollbar__corner
 //   position absolute
 //   height 0
 //   width 0
@@ -57,22 +61,22 @@
 //   border-left 4px solid transparent
 //   border-right 4px solid transparent
 //   cursor pointer
-// .el-scrollbar__corner:hover
+// .rudy-scrollbar__corner:hover
 //   border-bottom 4px solid hsla(220,4%,58%,.8)
 // .is-vertical
-//   .el-scrollbar__first
+//   .rudy-scrollbar__first
 //     left 0
 //     top -5px
-//   .el-scrollbar__last
+//   .rudy-scrollbar__last
 //     left 0
 //     bottom -6px
 //     transform rotate(180deg)
 // .is-horizontal
-//   .el-scrollbar__first
+//   .rudy-scrollbar__first
 //     left -7px
 //     top calc(50% - 3px)
 //     transform rotate(-90deg)
-//   .el-scrollbar__last
+//   .rudy-scrollbar__last
 //     right -7px
 //     top calc(50% - 3px)
 //     transform rotate(90deg)

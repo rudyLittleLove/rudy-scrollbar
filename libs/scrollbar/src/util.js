@@ -1,75 +1,75 @@
 export const BAR_MAP = {
   vertical: {
-    offset: "offsetHeight",
-    scroll: "scrollTop",
-    scrollSize: "scrollHeight",
-    size: "height",
-    key: "vertical",
-    axis: "Y",
-    client: "clientY",
-    direction: "top"
+    offset: 'offsetHeight',
+    scroll: 'scrollTop',
+    scrollSize: 'scrollHeight',
+    size: 'height',
+    key: 'vertical',
+    axis: 'Y',
+    client: 'clientY',
+    direction: 'top'
   },
   horizontal: {
-    offset: "offsetWidth",
-    scroll: "scrollLeft",
-    scrollSize: "scrollWidth",
-    size: "width",
-    key: "horizontal",
-    axis: "X",
-    client: "clientX",
-    direction: "left"
+    offset: 'offsetWidth',
+    scroll: 'scrollLeft',
+    scrollSize: 'scrollWidth',
+    size: 'width',
+    key: 'horizontal',
+    axis: 'X',
+    client: 'clientX',
+    direction: 'left'
   }
-};
-
-export function renderThumbStyle({ move, size, bar }) {
-  const style = {};
-  // const scale = bar.axis === "Y" ? "scale(1, .8)" : "scale(.8, 1)";
-  const translate = `translate${bar.axis}(${move}%)`;
-
-  style[bar.size] = size;
-  style.transform = translate;
-  style.msTransform = translate;
-  style.webkitTransform = translate;
-
-  return style;
 }
 
-export function scrollTo(m, scroll, wrapDom, callback) {
-  var reg = /^-?(\d+(\.\d+)?)$/;
+export function renderThumbStyle ({ move, size, bar }) {
+  const style = {}
+  // const scale = bar.axis === "Y" ? "scale(1, .8)" : "scale(.8, 1)";
+  const translate = `translate${bar.axis}(${move}%)`
+
+  style[bar.size] = size
+  style.transform = translate
+  style.msTransform = translate
+  style.webkitTransform = translate
+
+  return style
+}
+
+export function scrollTo (m, scroll, wrapDom, callback) {
+  var reg = /^-?(\d+(\.\d+)?)$/
 
   let scrollSize =
-    scroll === "scrollTop"
+    scroll === 'scrollTop'
       ? wrapDom.scrollHeight - wrapDom.clientHeight
-      : wrapDom.scrollWidth - wrapDom.clientWidth;
+      : wrapDom.scrollWidth - wrapDom.clientWidth
 
-  m = reg.test(m) ? m : wrapDom[scroll];
+  m = reg.test(m) ? m : wrapDom[scroll]
 
   if (m < 0) {
-    m = 0;
+    m = 0
   } else if (m > scrollSize) {
-    m = scrollSize;
+    m = scrollSize
   }
 
-  let ca = m - wrapDom[scroll];
-  let mVar = ca > 0 ? 1 : -1;
+  let ca = m - wrapDom[scroll]
+  let mVar = ca > 0 ? 1 : -1
 
-  scrollToSpeed(m, mVar, scroll, scrollSize, Math.abs(ca) / 50, wrapDom, callback);
+  scrollToSpeed(m, mVar, scroll, scrollSize, Math.abs(ca) / 50, wrapDom, callback)
 }
 
-function scrollToSpeed(m, mVar, scroll, scrollSize, speed, wrapDom, callback) {
-  let intM = wrapDom[scroll] + (speed += 1) * mVar;
+function scrollToSpeed (m, mVar, scroll, scrollSize, speed, wrapDom, callback) {
+  let intM = wrapDom[scroll] + (speed += 1) * mVar
 
-  intM = mVar === -1 ? (intM < m ? m : intM) : intM > m ? m : intM;
+  intM = mVar === -1 ? (intM < m ? m : intM) : intM > m ? m : intM
 
-  intM = intM > scrollSize ? scrollSize : intM;
-  intM = intM < 0 ? 0 : intM;
+  intM = intM > scrollSize ? scrollSize : intM
+  intM = intM < 0 ? 0 : intM
 
-  wrapDom[scroll] = intM;
+  wrapDom[scroll] = intM
 
   if (intM !== m) {
     setTimeout(() => {
-      scrollToSpeed(m, mVar, scroll, scrollSize, speed, wrapDom, callback);
-    }, 10);
+      scrollToSpeed(m, mVar, scroll, scrollSize, speed, wrapDom, callback)
+    }, 10)
   } else {
     callback && callback()
   }
