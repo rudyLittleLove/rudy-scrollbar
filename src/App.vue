@@ -1,6 +1,6 @@
 <template>
   <div id="app" style="height: 100%">
-    <!-- <rudy-scrollbar> -->
+    <rudy-scrollbar>
       <ul class="container">
         <li>
           <h2>滚动条基础用法</h2>
@@ -118,7 +118,7 @@
           </div>
         </li>
       </ul>
-    <!-- </rudy-scrollbar> -->
+    </rudy-scrollbar>
   </div>
 </template>
 
@@ -130,7 +130,7 @@ import RudyScrollbar from '../libs/scrollbar/index.js'
 
 export default {
   name: 'app',
-  components: {RudyScrollbar},
+  // components: {RudyScrollbar},
   data () {
     return {
       msgs: "Irish News. Gardaí and family 'very concerned' for man missing since early hours of today. Gardaí are appealing for help in tracing a missing man in Co Wexford",
