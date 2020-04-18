@@ -39,11 +39,13 @@ export default {
           { opacity1: this.barOpacity }
         ]}
         onMousedown={this.clickTrackHandler}
+        onTouchstart={this.clickTrackHandler}
       >
         <div
           ref="thumb"
           class={['rudy-scrollbar__thumb', this.barData.thumbClass]}
           onMousedown={this.clickThumbHandler}
+          onTouchstart={this.clickThumbHandler}
           style={renderThumbStyle({ size, move, bar })}
         />
       </div>
@@ -72,14 +74,14 @@ export default {
       this.startDrag(e)
       this[this.bar.axis] =
         e.currentTarget[this.bar.offset] -
-        (e[this.bar.client] -
+        ((e[this.bar.client] || e.targetTouches[0][this.bar.client]) -
           e.currentTarget.getBoundingClientRect()[this.bar.direction])
     },
 
     clickTrackHandler (e) {
       const offset = Math.abs(
         e.target.getBoundingClientRect()[this.bar.direction] -
-          e[this.bar.client]
+          (e[this.bar.client] ||  e.targetTouches[0][this.bar.client])
       )
       const thumbHalf = this.$refs.thumb[this.bar.offset] / 2
       const thumbPositionPercentage =
@@ -99,6 +101,9 @@ export default {
 
       on(document, 'mousemove', this.mouseMoveDocumentHandler)
       on(document, 'mouseup', this.mouseUpDocumentHandler)
+
+      on(document, 'touchmove', this.mouseMoveDocumentHandler)
+      on(document, 'touchend', this.mouseUpDocumentHandler)
       document.onselectstart = () => false
       document.ondragstart = () => false
     },
@@ -115,7 +120,7 @@ export default {
 
       const offset =
         (this.$el.getBoundingClientRect()[this.bar.direction] -
-          e[this.bar.client]) *
+          (e[this.bar.client] ||  e.targetTouches[0][this.bar.client])) *
         -1
       const thumbClickPosition = this.$refs.thumb[this.bar.offset] - prevPage
       const thumbPositionPercentage =
